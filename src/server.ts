@@ -1,12 +1,11 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 
-import { app } from "./app";
+import app from "./app";
+import env from "./utils/validateEnv";
 
-const DB = process.env.DATABASE!.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD!,
-);
+
+const DB = env.DATABASE.replace("<PASSWORD>", env.DATABASE_PASSWORD);
 
 const PORT = process.env.PORT || 4000;
 
