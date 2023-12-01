@@ -5,4 +5,6 @@ export default cleanEnv(process.env, {
   DATABASE: str(),
   DATABASE_PASSWORD: str(),
   NODE_ENV: str(),
+  JWT_SECRET: str(),
+  JWT_LIFETIME: str(),
 });

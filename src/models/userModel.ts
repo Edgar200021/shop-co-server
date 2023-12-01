@@ -1,8 +1,26 @@
-import { model, Schema, InferSchemaType } from "mongoose";
+import { Model, model, Schema, InferSchemaType } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 
-const userSchema = new Schema({
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  passwordToken?: string;
+  passwordTokenExpireDate?: Date;
+  role: "admin" | "user";
+}
+interface IUserMethods {
+  comparePassword(
+    candidatePassword: string,
+    password: string,
+  ): Promise<boolean>;
+}
+
+type UserModel = Model<IUser, object, IUserMethods>;
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
   name: {
     type: String,
     required: [true, "Please provide name"],
@@ -51,6 +69,11 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-type User = InferSchemaType<typeof userSchema>;
+userSchema.methods.comparePassword = async function (
+  candidatePassword: string,
+  password: string,
+) {
+  return await bcrypt.compare(candidatePassword, password);
+};
 
-export default model<User>("User", userSchema);
+export default model<IUser, UserModel>("User", userSchema);

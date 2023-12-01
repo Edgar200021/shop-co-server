@@ -5,6 +5,7 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
+import cookieParser from "cookie-parser";
 import "express-async-errors";
 
 import { AppError } from "./utils/AppError";
@@ -19,6 +20,7 @@ const app = express();
 app.use([
   helmet(),
   express.json(),
+  cookieParser(env.JWT_SECRET),
   cors(),
   mongoSanitize(),
   hpp({ whitelist: [] }),
