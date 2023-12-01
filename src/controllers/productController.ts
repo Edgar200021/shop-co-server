@@ -1,13 +1,40 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import Product from "../models/productModel";
-import { AppError } from "../utils/AppError";
 
-const getAllProducts = async (req: Request, res: Response) => {
-  const products = await Product.find();
+import { AppError } from "../utils/AppError";
+import { APIFeatures } from "../utils/ApiFeatures";
+
+export interface IGetAllProductsQuery {
+  title: string;
+  price: string;
+  category: string;
+  size: string;
+  color: string;
+  page: string;
+  limit: string;
+  fields: string;
+  sort: string;
+}
+
+const getAllProducts: RequestHandler<
+  unknown,
+  unknown,
+  unknown,
+  IGetAllProductsQuery
+> = async (req, res) => {
+  const productsFeature = new APIFeatures(Product.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const products = await productsFeature.query;
+
+  console.log(products);
 
   return res.status(200).json({
     status: "success",
-    results: products.length,
+    //results: products.length,
     data: {
       products,
     },
@@ -30,9 +57,17 @@ const getProduct = async (req: Request, res: Response) => {
 };
 
 const createProduct = async (req: Request, res: Response) => {
-  const { title, price, image, colors } = req.body;
+  const { title, price, image, color, discount, size, category } = req.body;
 
-  const product = await Product.create({ title, price, image, colors });
+  const product = await Product.create({
+    title,
+    price,
+    image,
+    color,
+    discount,
+    size,
+    category,
+  });
 
   return res.status(201).json({
     status: "success",
@@ -51,6 +86,8 @@ const updateProduct = async (req: Request, res: Response) => {
   if (!product) {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
   }
+
+  console.log("updated Product", product);
 
   return res.status(200).json({
     status: "success",
