@@ -1,4 +1,3 @@
-import { ApiError } from "./utils/ApiError";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -8,8 +7,9 @@ import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import "express-async-errors";
 
+import { AppError } from "./utils/AppError";
 import env from "./utils/validateEnv";
-import { errorController } from "./controllers/errorController";
+import errorController from "./controllers/errorController";
 
 import productRouter from "./routes/productRoutes";
 
@@ -37,8 +37,8 @@ if (env.NODE_ENV === "development") {
 
 app.use("/api/v1/products", productRouter);
 
-app.all("*", (req: Request, res: Response, next: NextFunction) => {
-  next(new ApiError("Not found page", 404));
+app.all("*", (req: Request /* res: Response, next: NextFunction*/) => {
+  throw new AppError(`Can't find ${req.originalUrl} on this server`, 404);
 });
 app.use(errorController);
 
