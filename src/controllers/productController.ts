@@ -1,20 +1,9 @@
+import { IGetAllProductsQuery } from "./../types";
 import { Request, RequestHandler, Response } from "express";
 import Product from "../models/productModel";
 
 import { AppError } from "../utils/AppError";
 import { APIFeatures } from "../utils/ApiFeatures";
-
-export interface IGetAllProductsQuery {
-  title: string;
-  price: string;
-  category: string;
-  size: string;
-  color: string;
-  page: string;
-  limit: string;
-  fields: string;
-  sort: string;
-}
 
 const getAllProducts: RequestHandler<
   unknown,
@@ -22,7 +11,10 @@ const getAllProducts: RequestHandler<
   unknown,
   IGetAllProductsQuery
 > = async (req, res) => {
-  const productsFeature = new APIFeatures(Product.find(), req.query)
+  const productsFeature = new APIFeatures<IGetAllProductsQuery>(
+    Product.find(),
+    req.query,
+  )
     .filter()
     .sort()
     .limitFields()
@@ -30,11 +22,9 @@ const getAllProducts: RequestHandler<
 
   const products = await productsFeature.query;
 
-  console.log(products);
-
   return res.status(200).json({
     status: "success",
-    //results: products.length,
+    results: products.length,
     data: {
       products,
     },

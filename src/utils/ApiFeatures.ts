@@ -1,6 +1,6 @@
-import { IGetAllProductsQuery } from "../controllers/productController";
+import { IQuery } from "../types/query";
 
-export class APIFeatures {
+export class APIFeatures<T extends IQuery> {
   _excludedFields = new Set()
     .add("page")
     .add("sort")
@@ -9,7 +9,7 @@ export class APIFeatures {
 
   constructor(
     public query: any,
-    public queryObj: IGetAllProductsQuery,
+    public queryObj: T,
   ) {}
 
   filter() {
@@ -55,7 +55,6 @@ export class APIFeatures {
 
       if (!primitiveType) {
         const key = Object.keys(val)[0];
-        //@ts-expect-error 232/
         value[`$${key}`] = val[key];
       }
 
