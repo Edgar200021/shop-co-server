@@ -1,4 +1,6 @@
+import { sendEmail } from "./../utils/mail";
 import { NextFunction, Request, Response } from "express";
+import crypto from "crypto";
 
 import User from "../models/userModel";
 import { attachCookieToResponse, verifyJwt } from "../utils/jwt";
@@ -58,8 +60,66 @@ const logout = (req: Request, res: Response) => {
     message: "User loged out",
   });
 };
-const forgotPassword = async (req: Request, res: Response) => {};
-const resetPassword = async (req: Request, res: Response) => {};
+const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  if (!email) throw new AppError("Please provide email", 400);
+
+  const user = await User.findOne({ email });
+
+  if (!user) throw new AppError(`No user with email ${email}`, 404);
+
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetUrl = `${req.protocol}://${req.get(
+    "host",
+  )}/api/v1/users/resetPassword/${resetToken}`;
+
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Shop-Co: Reset password ✅",
+      message,
+    });
+  } catch (error) {
+    throw new AppError(error, 500);
+  }
+
+  return res.status(200).json({
+    status: "success",
+    message: "Please check your email for reset password",
+  });
+};
+const resetPassword = async (req: Request, res: Response) => {
+  const { resetToken } = req.params;
+  const { password, passwordConfirm } = req.body;
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  if (!user) throw new AppError("Token is invalid or has expired", 400);
+
+  user.password = password;
+  user.passwordConfirm = passwordConfirm;
+  user.passwordResetExpires = user.passwordResetToken = undefined;
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    message: "Please go to login page and login",
+  });
+};
 
 const protect = async (
   req: ICustomRequest,
@@ -70,7 +130,7 @@ const protect = async (
 
   if (!token) throw new AppError("Authentication failed", 401);
 
-  //@ts-expect-error expec
+  // @ts-expect-error 23232
   const { id } = await verifyJwt(token);
 
   const currentUser = await User.findById(id);

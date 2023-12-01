@@ -13,6 +13,7 @@
 //    interface Request {
 //      user?: {
 //        id: Types.ObjectId;
+//        role: "admin" | "user";
 //      };
 //    }
 //  }
@@ -22,6 +23,7 @@
 //  interface Request {
 //    user?: {
 //      id: Types.ObjectId;
+//      role: "admin" | "user";
 //    };
 //  }
 //}

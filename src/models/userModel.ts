@@ -1,21 +1,23 @@
-import { Model, model, Schema, InferSchemaType } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 interface IUser {
   name: string;
   email: string;
   password: string;
   passwordConfirm: string;
-  passwordToken?: string;
-  passwordTokenExpireDate?: Date;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
   role: "admin" | "user";
 }
 interface IUserMethods {
-  comparePassword(
+  comparePassword: (
     candidatePassword: string,
     password: string,
-  ): Promise<boolean>;
+  ) => Promise<boolean>;
+  createPasswordResetToken: () => void;
 }
 
 type UserModel = Model<IUser, object, IUserMethods>;
@@ -52,8 +54,8 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
     },
     select: false,
   },
-  passwordToken: String,
-  passwordTokenExpireDate: Date,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
   role: {
     type: String,
     enum: ["admin", "user"],
@@ -74,6 +76,19 @@ userSchema.methods.comparePassword = async function (
   password: string,
 ) {
   return await bcrypt.compare(candidatePassword, password);
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
+
+  return resetToken;
 };
 
 export default model<IUser, UserModel>("User", userSchema);
