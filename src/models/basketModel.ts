@@ -1,15 +1,29 @@
 import { InferSchemaType, Schema, model } from "mongoose";
-
+import validator from "validator";
 export const basketItemSchema = new Schema({
   size: {
     type: String,
     required: [true, "Please choose size"],
     trim: true,
+    enum: {
+      values: [
+        "XX-Small",
+        "X-Small",
+        "Small",
+        "Medium",
+        "Large",
+        "X-Large",
+        "XX-Large",
+        "3X-Large",
+        "4X-Large",
+      ],
+      message: "{VALUE} is not supported for size",
+    },
   },
   color: {
     type: String,
     required: [true, "Please choose color"],
-    trim: true,
+    validate: [validator.isHexColor, "Color must be in hex format"],
   },
   quantity: {
     type: Number,
@@ -29,6 +43,16 @@ const basketSchema = new Schema(
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
+
+basketSchema.pre(/^find/, function (next) {
+  //@ts-expect-error need this
+  this.populate({
+    path: "items.product",
+    select: "image title price",
+  });
+
+  next();
+});
 
 type Basket = InferSchemaType<typeof basketSchema>;
 

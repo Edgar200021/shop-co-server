@@ -1,11 +1,13 @@
-import { APIFeatures } from "./../utils/ApiFeatures";
-import {  Response, RequestHandler } from "express";
+import mongoose from "mongoose";
+import { Response, RequestHandler } from "express";
+
 import Basket from "../models/basketModel";
 import Product from "../models/productModel";
 
+import { APIFeatures } from "./../utils/ApiFeatures";
+import { AppError } from "../utils/AppError";
 import { ICustomRequest } from "../types/index";
 import { IQuery } from "../types/query";
-import { AppError } from "../utils/AppError";
 
 const getAllBasketProducts: RequestHandler<
   unknown,
@@ -16,7 +18,7 @@ const getAllBasketProducts: RequestHandler<
   const userId = (req as unknown as ICustomRequest).user.id;
 
   const basketFeature = new APIFeatures(
-    Basket.findById(userId),
+    Basket.findOne({ user: new mongoose.Types.ObjectId(userId) }),
     req.query,
   ).paginate();
 
@@ -24,16 +26,15 @@ const getAllBasketProducts: RequestHandler<
 
   return res.status(200).json({
     status: "success",
-    results: basketProducts.items.length,
+    results: basketProducts.items?.length,
     data: {
-      basketProducts,
+      basketProducts: basketProducts.items,
     },
   });
 };
 
 const createBasketProduct = async (req: ICustomRequest, res: Response) => {
-  const { size, color, quantity } = req.body;
-  const { productId } = req.params;
+  const { size, color, quantity, productId } = req.body;
 
   const product = await Product.findById(productId);
 
@@ -45,12 +46,18 @@ const createBasketProduct = async (req: ICustomRequest, res: Response) => {
     throw new AppError("Something went wrong. Try again later!", 500);
 
   const isBasketProductExist = basket.items.some(
-    (el) => el.product?.toString() === productId,
+    (item) =>
+      item.product._id?.toString() === productId &&
+      item.color === color &&
+      item.size === size,
   );
 
   if (isBasketProductExist) {
     const item = basket.items.find(
-      (item) => item.product?.toString() === productId,
+      (item) =>
+        item.product._id?.toString() === productId &&
+        item.color === color &&
+        item.size === size,
     );
     item!.quantity = item!.quantity + quantity;
   } else {
@@ -76,9 +83,10 @@ const deleteBasketProduct = async (req: ICustomRequest, res: Response) => {
     throw new AppError("Something went wrong. Try again later!", 500);
 
   // @ts-expect-error need this
+
   basket.items = basket.items.filter((item) => item._id?.toString() !== id);
 
-  await basket.save();
+  await basket.save({ validateBeforeSave: false });
 
   return res.status(204).json({
     status: "success",
