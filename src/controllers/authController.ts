@@ -46,6 +46,7 @@ const login = async (req: Request, res: Response) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     },
   });
@@ -120,7 +121,6 @@ const resetPassword = async (req: Request, res: Response) => {
     message: "Please go to login page and login",
   });
 };
-
 const protect = async (
   req: ICustomRequest,
   res: Response,
@@ -155,6 +155,36 @@ const restrictTo = (...roles: string[]) => {
     next();
   };
 };
+const updatePassword = async (req: ICustomRequest, res: Response) => {
+  const { currentPassword, password, passwordConfirm } = req.body;
+
+  const user = await User.findById(req.user.id).select("+password");
+
+  if (!currentPassword)
+    throw new AppError("Please provide your current password", 400);
+
+  const isCorrectPassword = await user.comparePassword(
+    currentPassword,
+    user.password,
+  );
+  if (!isCorrectPassword)
+    throw new AppError("Your current password is wrong", 401);
+
+  user.password = password;
+  user.passwordConfirm = passwordConfirm;
+  await user.save();
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    },
+  });
+};
 
 export {
   signup,
@@ -162,6 +192,7 @@ export {
   logout,
   forgotPassword,
   resetPassword,
+  updatePassword,
   protect,
   restrictTo,
 };

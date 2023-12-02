@@ -3,7 +3,7 @@ import { IGetAllProductsQuery } from "./query";
 import { Request } from "express";
 
 interface ICustomRequest extends Request {
-  user?: {
+  user: {
     id: Types.ObjectId;
     role: "admin" | "user";
   };

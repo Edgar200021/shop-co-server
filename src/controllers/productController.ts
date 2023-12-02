@@ -32,7 +32,7 @@ const getAllProducts: RequestHandler<
 };
 
 const getProduct = async (req: Request, res: Response) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id)
 
   if (!product) {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);

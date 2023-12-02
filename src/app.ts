@@ -14,6 +14,7 @@ import errorController from "./controllers/errorController";
 
 import productRouter from "./routes/productRoutes";
 import userRouter from "./routes/userRoutes";
+import reviewRouter from "./routes/reviewRoutes";
 
 const app = express();
 
@@ -40,6 +41,7 @@ if (env.NODE_ENV === "development") {
 
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/review", reviewRouter);
 
 app.all("*", (req: Request /* res: Response, next: NextFunction*/) => {
   throw new AppError(`Can't find ${req.originalUrl} on this server`, 404);

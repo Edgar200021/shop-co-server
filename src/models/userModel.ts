@@ -26,21 +26,24 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
   name: {
     type: String,
     required: [true, "Please provide name"],
+    trim: true,
   },
   email: {
     type: String,
     required: [true, "Please provide email"],
     unique: true,
     validate: [validator.isEmail, "Invalid email"],
+    lowercase: true,
+    trim: true,
   },
   password: {
     type: String,
-
     required: [true, "Please provide password"],
     validate: [
       validator.isStrongPassword,
       "Come up with a more complex password",
     ],
+    trim: true,
   },
   passwordConfirm: {
     type: String,
@@ -52,6 +55,7 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
       },
       message: "The passwords don't match",
     },
+    trim: true,
     select: false,
   },
   passwordResetToken: String,
@@ -77,7 +81,6 @@ userSchema.methods.comparePassword = async function (
 ) {
   return await bcrypt.compare(candidatePassword, password);
 };
-
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString("hex");
 

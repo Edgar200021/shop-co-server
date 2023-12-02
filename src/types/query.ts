@@ -12,3 +12,12 @@ export interface IGetAllProductsQuery extends IQuery {
   size: string;
   color: string;
 }
+
+export interface IGetAllUsersQuery extends IQuery {
+  name: string;
+  email: string;
+}
+
+export interface IGetAllReviews extends IQuery {
+  rating: string;
+}

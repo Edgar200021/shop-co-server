@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as productController from "../controllers/productController";
 import * as authController from "../controllers/authController";
 
+
 const router = Router();
 
 router
@@ -12,6 +13,7 @@ router
     authController.restrictTo("admin"),
     productController.createProduct,
   );
+
 router
   .route("/:id")
   .get(productController.getProduct)
