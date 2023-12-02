@@ -1,5 +1,6 @@
 import { InferSchemaType, Schema, Types, model } from "mongoose";
 import Product from "./productModel";
+import { AppError } from "../utils/AppError";
 
 const reviewSchema = new Schema({
   review: {
@@ -43,8 +44,6 @@ reviewSchema.statics.calcAverageRatings = async function (
     },
   ]);
 
-  console.log(stats);
-
   if (stats.length > 0) {
     await Product.findByIdAndUpdate(product, {
       ratingQuantity: stats[0].nRating,
@@ -65,6 +64,14 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
+reviewSchema.pre("save", async function (next) {
+  const product = await Product.findById(this.product);
+
+  if (!product)
+    throw new AppError(`There are no product with id ${this.product}`, 404);
+
+  next();
+});
 reviewSchema.post("save", async function () {
   //@ts-expect-error i need this
   await this.constructor.calcAverageRatings(this.product);

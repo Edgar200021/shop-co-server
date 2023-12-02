@@ -1,6 +1,6 @@
 import { IQuery } from "../types/query";
 
-export class APIFeatures<T extends IQuery> {
+export class APIFeatures<T extends Partial<IQuery>> {
   _excludedFields = new Set()
     .add("page")
     .add("sort")

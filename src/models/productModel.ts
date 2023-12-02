@@ -1,6 +1,8 @@
 import { InferSchemaType, model, Schema } from "mongoose";
 import validator from "validator";
 
+import Review from "./reviewModel";
+
 const productSchema = new Schema(
   {
     title: {
@@ -8,7 +10,7 @@ const productSchema = new Schema(
       unique: true,
       required: [true, "Product must have a title"],
       maxLength: [
-        20,
+        30,
         "A product title name must have less or equal than 20 characters",
       ],
       minLength: [
@@ -41,6 +43,7 @@ const productSchema = new Schema(
     image: {
       type: String,
       required: [true, "Product must have a image"],
+      trim: true,
     },
     color: {
       type: [String],
@@ -94,32 +97,40 @@ productSchema.virtual("reviews", {
 });
 
 productSchema.pre("save", function (next) {
-  if (this.discount) {
+  if (this.isNew && this.discount) {
     this.priceDiscount = this.price * (1 - this.discount / 100);
   }
 
   next();
 });
-
-productSchema.pre(/^findOneAnd/, async function (next) {
+productSchema.pre("findOneAndUpdate", async function (next) {
   // @ts-expect-error i need this ts enable,believe me :D
+  if (!this.getUpdate().price && !this.getUpdate().discount) return next();
   const doc = await this.model.findOne(this.getQuery());
   // @ts-expect-error i need this ts enable,believe me :D
-  const price = this._update.price ? this._update.price : doc.price;
+  const price = this.getUpdate().price || doc.price;
   // @ts-expect-error i need this ts enable,believe me :D
-  if (this._update.discount) {
-    // @ts-expect-error i need this ts enable,believe me :D
-    doc.priceDiscount = price * (1 - this._update.discount / 100);
-    // @ts-expect-error i need this ts enable,believe me :D
-    doc.discount = this._update.discount;
-    await doc.save();
-  }
+  const discount = this.getUpdate().discount || doc.discount;
+
+  if (!discount) return next();
+  this.updateOne({
+    priceDiscount: price * (1 - discount / 100),
+    discount,
+  });
 
   next();
 });
 productSchema.pre("findOne", function (next) {
   this.select("-__v");
   this.populate({ path: "reviews", select: "-__v" });
+  next();
+});
+
+productSchema.pre("findOneAndDelete", async function (next) {
+  const doc = await this.model.find(this.getQuery());
+
+  await Review.deleteMany({ product: doc[0]._id });
+
   next();
 });
 

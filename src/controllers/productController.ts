@@ -77,7 +77,6 @@ const updateProduct = async (req: Request, res: Response) => {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
   }
 
-  console.log("updated Product", product);
 
   return res.status(200).json({
     status: "success",

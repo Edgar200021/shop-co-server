@@ -3,6 +3,9 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
+import Basket from "./basketModel";
+import Review from "./reviewModel";
+
 interface IUser {
   name: string;
   email: string;
@@ -68,10 +71,19 @@ const userSchema = new Schema<IUser, UserModel, IUserMethods>({
 });
 
 userSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    await Basket.create({ user: this._id });
+  }
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
 
+  next();
+});
+userSchema.pre("findOneAndDelete", async function (next) {
+  const doc = await this.model.find(this.getQuery());
+  await Basket.deleteOne({ user: doc[0]._id });
+  await Review.deleteMany({ user: doc[0]._id });
   next();
 });
 

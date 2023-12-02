@@ -2,6 +2,7 @@ import mongoose, { isValidObjectId } from "mongoose";
 import { Request, Response, RequestHandler, NextFunction } from "express";
 
 import Review from "../models/reviewModel";
+
 import { AppError } from "./../utils/AppError";
 import { APIFeatures } from "./../utils/ApiFeatures";
 import { IGetAllReviews } from "../types/query";
@@ -24,8 +25,9 @@ const getAllReviews: RequestHandler<
     throw new AppError("Please provide product id", 400);
 
   const reviewFeature = new APIFeatures(
-    Review.find({ product: new mongoose.Types.ObjectId(req.params.productId) })
-    .select("-product"),
+    Review.find({
+      product: new mongoose.Types.ObjectId(req.params.productId),
+    }).select("-product"),
     req.query,
   )
     .filter()
@@ -102,7 +104,7 @@ const setUserIdToBody = (
 };
 
 const updateReview = async (req: Request, res: Response) => {
-  if (!req.body.userId) throw new AppError("Please provide user iD", 400);
+  if (!req.body.userId) throw new AppError("Please provide user id", 400);
 
   const review = await Review.findOneAndUpdate(
     {
