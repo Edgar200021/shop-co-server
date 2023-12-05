@@ -1,7 +1,8 @@
 import { Router } from "express";
 import * as productController from "../controllers/productController";
+import * as uploadController from "../controllers/uploadController";
 import * as authController from "../controllers/authController";
-
+import { upload } from "../utils/multer";
 
 const router = Router();
 
@@ -13,6 +14,14 @@ router
     authController.restrictTo("admin"),
     productController.createProduct,
   );
+
+router.post(
+  "/upload",
+  authController.protect,
+  authController.restrictTo("admin"),
+  upload.single("image"),
+  uploadController.uploadProductImage,
+);
 
 router
   .route("/:id")

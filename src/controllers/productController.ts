@@ -1,5 +1,6 @@
 import { IGetAllProductsQuery } from "./../types";
 import { Request, RequestHandler, Response } from "express";
+
 import Product from "../models/productModel";
 
 import { AppError } from "../utils/AppError";
@@ -32,7 +33,7 @@ const getAllProducts: RequestHandler<
 };
 
 const getProduct = async (req: Request, res: Response) => {
-  const product = await Product.findById(req.params.id)
+  const product = await Product.findById(req.params.id);
 
   if (!product) {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
@@ -76,7 +77,6 @@ const updateProduct = async (req: Request, res: Response) => {
   if (!product) {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
   }
-
 
   return res.status(200).json({
     status: "success",

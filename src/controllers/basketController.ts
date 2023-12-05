@@ -26,9 +26,11 @@ const getAllBasketProducts: RequestHandler<
 
   return res.status(200).json({
     status: "success",
-    results: basketProducts.items?.length,
+    results: basketProducts.items.length,
     data: {
       basketProducts: basketProducts.items,
+      totalQuantity: basketProducts.quantity,
+      totalPrice: basketProducts.totalPrice,
     },
   });
 };
@@ -45,7 +47,7 @@ const createBasketProduct = async (req: ICustomRequest, res: Response) => {
   if (!basket)
     throw new AppError("Something went wrong. Try again later!", 500);
 
-  const isBasketProductExist = basket.items.some(
+  const isBasketProductExist = basket.items.find(
     (item) =>
       item.product._id?.toString() === productId &&
       item.color === color &&
@@ -53,13 +55,7 @@ const createBasketProduct = async (req: ICustomRequest, res: Response) => {
   );
 
   if (isBasketProductExist) {
-    const item = basket.items.find(
-      (item) =>
-        item.product._id?.toString() === productId &&
-        item.color === color &&
-        item.size === size,
-    );
-    item!.quantity = item!.quantity + quantity;
+    isBasketProductExist!.quantity = isBasketProductExist!.quantity + quantity;
   } else {
     basket.items.push({ color, size, quantity, product: productId });
   }

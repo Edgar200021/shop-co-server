@@ -6,6 +6,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import "express-async-errors";
 
 import { AppError } from "./utils/AppError";
@@ -22,6 +23,7 @@ const app = express();
 app.use([
   helmet(),
   express.json(),
+  bodyParser.urlencoded({ extended: true }),
   cookieParser(env.JWT_SECRET),
   cors(),
   mongoSanitize(),
