@@ -66,8 +66,8 @@ const errorController = (
 ) => {
   //  return res.status(500).json({ err });
 
-  if (env.NODE_ENV === "development") handleDevelopmentError(err, res);
-  if (env.NODE_ENV === "production") {
+  if (env.NODE_ENV === "production") handleDevelopmentError(err, res);
+  if (env.NODE_ENV === "development") {
     let error = { ...err, name: err.name };
     console.log(error.name);
     if (error.name === "ValidationError")

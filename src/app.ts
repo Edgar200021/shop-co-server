@@ -38,7 +38,7 @@ const limiter = rateLimit({
 
 app.use("/api", limiter);
 
-if (env.NODE_ENV === "development") {
+if (env.NODE_ENV === "production") {
   app.use(morgan("dev"));
 }
 
