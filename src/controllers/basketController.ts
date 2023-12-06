@@ -102,7 +102,7 @@ const updateBasketProduct = async (req: ICustomRequest, res: Response) => {
   // @ts-expect-error need this
   basket.items = basket.items.map((item) =>
     item._id?.toString() === id
-      ? { ...item, quantity: item.quantity + quantity }
+      ? { ...item, quantity:  quantity }
       : item,
   );
 
