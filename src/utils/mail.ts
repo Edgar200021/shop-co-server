@@ -17,10 +17,9 @@ export const sendEmail = async (config: {
   message: string;
 }) => {
   await transporter.sendMail({
-    from: "Edgar 👻shop-co>",
+    from: "👻shop-co>",
     to: config.email,
     subject: config.subject,
     text: config.message,
-    //html: "<b>Hello world?</b>", // html body
   });
 };

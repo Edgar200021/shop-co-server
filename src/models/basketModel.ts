@@ -119,7 +119,7 @@ basketSchema.statics.calcTotalPrice = async function (
     //@ts-expect-error sds
     basketInstance.isModified("totalPrice") ||
     //@ts-expect-error sds
-    basketInstance.itModified("totalDiscountedPrice")
+    basketInstance.isModified("totalDiscountedPrice")
   ) {
     //@ts-expect-error sds
     await basketInstance.save();

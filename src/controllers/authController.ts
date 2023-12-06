@@ -10,6 +10,8 @@ import { ICustomRequest } from "../types";
 const signup = async (req: Request, res: Response) => {
   const { name, email, password, passwordConfirm } = req.body;
 
+  console.log(name, email);
+
   const user = await User.create({ name, email, password, passwordConfirm });
 
   attachCookieToResponse(res, { id: user._id });
@@ -74,9 +76,10 @@ const forgotPassword = async (req: Request, res: Response) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetUrl = `${req.protocol}://${req.get(
-    "host",
-  )}/api/v1/users/resetPassword/${resetToken}`;
+//  const resetUrl = `${req.protocol}://${req.get(
+//    "host",
+//  )}/auth/reset-password/${resetToken}`;
+  const resetUrl = `http://localhost:5173/auth/reset-password/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
 
