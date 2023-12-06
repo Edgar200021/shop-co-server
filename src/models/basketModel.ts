@@ -83,7 +83,16 @@ basketSchema.statics.calcTotalPrice = async function (
         quantity: { $sum: "$items.quantity" },
         total: {
           $sum: {
-            $multiply: ["$items.quantity", "$product.price"],
+            $multiply: [
+              "$items.quantity",
+              {
+                $cond: {
+                  if: { $gt: ["$product.priceDiscount", 0] },
+                  then: "$product.priceDiscount",
+                  else: "$product.price",
+                },
+              },
+            ],
           },
         },
       },
