@@ -83,7 +83,7 @@ basketSchema.statics.calcTotalPrice = async function (
         _id: null,
         quantity: { $sum: "$items.quantity" },
         totalPrice: {
-          $sum: { $multiply: ["$items.quantity", "$items.price"] },
+          $sum: { $multiply: ["$items.quantity", "$product.price"] },
         },
         totalDiscountedPrice: {
           $sum: {
@@ -117,7 +117,9 @@ basketSchema.statics.calcTotalPrice = async function (
     //@ts-expect-error sds
     basketInstance.isModified("quantity") ||
     //@ts-expect-error sds
-    basketInstance.isModified("totalPrice")
+    basketInstance.isModified("totalPrice") ||
+    //@ts-expect-error sds
+    basketInstance.itModified("totalDiscountedPrice")
   ) {
     //@ts-expect-error sds
     await basketInstance.save();
