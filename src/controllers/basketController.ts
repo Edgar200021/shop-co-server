@@ -31,6 +31,7 @@ const getAllBasketProducts: RequestHandler<
       basketProducts: basketProducts.items,
       totalQuantity: basketProducts.quantity,
       totalPrice: basketProducts.totalPrice,
+      totalDiscountedPrice: basketProducts.totalDiscountedPrice,
     },
   });
 };
