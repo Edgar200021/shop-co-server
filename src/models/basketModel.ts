@@ -42,6 +42,7 @@ const basketSchema = new Schema(
     items: [basketItemSchema],
     quantity: Number,
     totalPrice: Number,
+    totalDiscountedPrice: Number,
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
@@ -81,7 +82,10 @@ basketSchema.statics.calcTotalPrice = async function (
       $group: {
         _id: null,
         quantity: { $sum: "$items.quantity" },
-        total: {
+        totalPrice: {
+          $sum: { $multiply: ["$items.quantity", "$items.price"] },
+        },
+        totalDiscountedPrice: {
           $sum: {
             $multiply: [
               "$items.quantity",
@@ -101,9 +105,11 @@ basketSchema.statics.calcTotalPrice = async function (
 
   if (total && total.length > 0) {
     basketInstance.quantity = total[0].quantity;
-    basketInstance.totalPrice = total[0].total;
+    basketInstance.totalDiscountedPrice = total[0].totalDiscountedPrice;
+    basketInstance.totalPrice = total[0].totalPrice;
   } else {
     basketInstance.quantity = 0;
+    basketInstance.totalDiscountedPrice = 0;
     basketInstance.totalPrice = 0;
   }
 

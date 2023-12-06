@@ -73,7 +73,6 @@ const errorController = (
     if (error.name === "ValidationError")
       //@ts-expect-error for validation errors
       error = handleValidationErrorDB(error);
-
     //@ts-expect-error for validation errors
     if (error.code === 11000) error = handleDuplicateErrorDB(error);
     if (error.name === "JsonWebTokenError") error = handleJWTError();
