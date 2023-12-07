@@ -34,6 +34,7 @@ async function deleteAllData() {
     console.log("connecting to DB");
     if (process.argv[2] === "--delete") await deleteAllData();
     if (process.argv[2] === "--insert") await addData();
+    process.exit(0);
   } catch (err) {
     console.error(err);
   }

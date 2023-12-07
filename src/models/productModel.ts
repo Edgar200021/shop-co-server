@@ -18,6 +18,10 @@ const productSchema = new Schema(
         "A product title name must have more or equal than 4 characters",
       ],
     },
+	description: {
+		type: String,
+		required: [true, 'Product must have a description']
+	},
     category: {
       type: "String",
       required: [true, "Product must have a category"],
