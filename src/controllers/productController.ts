@@ -39,7 +39,7 @@ const getProduct = async (req: Request, res: Response) => {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
   }
 
-  console.log(product)
+  console.log(product);
   return res.status(200).json({
     status: "success",
     data: {
@@ -49,7 +49,8 @@ const getProduct = async (req: Request, res: Response) => {
 };
 
 const createProduct = async (req: Request, res: Response) => {
-  const { title, price, image, color, discount, size, category, description } = req.body;
+  const { title, price, image, color, discount, size, category, description } =
+    req.body;
 
   const product = await Product.create({
     title,
@@ -59,7 +60,7 @@ const createProduct = async (req: Request, res: Response) => {
     discount,
     size,
     category,
-	description
+    description,
   });
 
   return res.status(201).json({

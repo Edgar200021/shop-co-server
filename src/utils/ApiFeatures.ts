@@ -15,6 +15,7 @@ export class APIFeatures<T extends Partial<IQuery>> {
   filter() {
     const { filterObj } = this._splitFilteredFields();
 
+	console.log(filterObj)
     this.query = this.query.find(filterObj);
 
     return this;
@@ -55,7 +56,7 @@ export class APIFeatures<T extends Partial<IQuery>> {
 
       if (!primitiveType) {
         const key = Object.keys(val)[0];
-        value[`$${key}`] = val[key];
+        value[`$${key}`] = key === 'regex' ? new RegExp(val[key], 'i')  : val[key];
       }
 
       !this._excludedFields.has(key) &&
