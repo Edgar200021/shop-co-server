@@ -1,0 +1,413 @@
+[
+  {
+    "title": "Cotton Classic T-shirt",
+    "price": 25.99,
+    "description": "Simple and stylish 100% cotton t-shirt.",
+    "discount": 15,
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#3498db", "#95a5a6", "#e74c3c"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928253/shop-co/1701928251197_DeepBlue_Regular_yk27hp.webp"
+  },
+  {
+    "title": "Slim Fit Jeans",
+    "price": 49.99,
+    "description": "Modern Slim Fit jeans for an elegant look.",
+    "size": ["Large", "X-Large"],
+    "color": ["#2ecc71", "#3498db"],
+    "category": "jeans",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928321/shop-co/1701928321420_SD_01_T57_7564_GJ_X_EC_90_yqgad8.webp"
+  },
+  {
+    "title": "Urban Style Hoodie",
+    "price": 34.99,
+    "description": "Comfortable hoodie with urban style for everyday wear.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#e74c3c", "#34495e", "#f39c12"],
+    "category": "hoodie",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928389/shop-co/1701928387053_images_t0cw1v.jpg"
+  },
+  {
+    "title": "V-neck T-shirt",
+    "price": 19.99,
+    "description": "Stylish V-neck t-shirt for a trendy look.",
+    "size": ["Small", "Medium"],
+    "color": ["#f39c12", "#95a5a6"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928443/shop-co/1701928443265_a19a1f0807ac3fcf0b5bb808f2b566c24d3287f5-1500x2000_i6vk3z.webp"
+  },
+  {
+    "title": "Sporty Comfort Shorts",
+    "price": 29.99,
+    "description": "Sporty shorts for comfortable workouts.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#9b59b6", "#2ecc71", "#3498db"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928493/shop-co/1701928492524_in5253_2_apparel_photography_front-center-view_white_jri4my.webp"
+  },
+  {
+    "title": "Oxford Classic Shirt",
+    "price": 39.99,
+    "description": "Classic Oxford shirt for a business casual style.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#34495e", "#f1c40f", "#e74c3c"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928546/shop-co/1701928544745_SH1559315_WT01_055_1_hibyhh.webp"
+  },
+  {
+    "title": "Graphic Print T-shirt",
+    "price": 22.99,
+    "description": "T-shirt with a stylish graphic print for a bold look.",
+    "discount": 10,
+    "size": ["X-Small", "Small", "Medium"],
+    "color": ["#c0392b", "#3498db", "#27ae60"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928608/shop-co/1701928606290_thumb___madara_uchiha_t_shirtesbt_rqkelo.jpg"
+  },
+  {
+    "title": "Relaxed Fit Jeans",
+    "price": 54.99,
+    "description": "Jeans with a relaxed fit for freedom of movement.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#1abc9c", "#f39c12", "#3498db"],
+    "category": "jeans",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928654/shop-co/1701928653304_hmgoepprod_ozutqu.jpg"
+  },
+  {
+    "title": "Retro Vibes Hoodie",
+    "price": 37.99,
+    "description": "Hoodie with retro vibes for a stylish look.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#d35400", "#3498db", "#e74c3c"],
+    "category": "hoodie",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928723/shop-co/1701928722211_eaf14de8c8eb0ba4d2b7023fcf17d7e8_c4yigo.jpg"
+  },
+  {
+    "title": "Striped Elegance T-shirt",
+    "price": 27.99,
+    "description": "T-shirt with striped design for elegance.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#2980b9", "#f39c12", "#2ecc71"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928776/shop-co/1701928776472_6871537251_1_1_16_bcrexp.webp"
+  },
+  {
+    "title": "Active Lifestyle Shorts",
+    "price": 31.99,
+    "description": "Shorts for an active lifestyle and sports.",
+    "size": ["Small", "Medium", "Large"],
+    "color": ["#27ae60", "#2ecc71", "#3498db"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928823/shop-co/1701928822351_5de0d03def6eb4c7c8b13a5e1515ff4817b56a94_cne8594_6_u0woak.avif"
+  },
+  {
+    "title": "Casual Check Shirt",
+    "price": 44.99,
+    "description": "Casual checkered shirt for everyday wear.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#8e44ad", "#2c3e50", "#f1c40f"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928925/shop-co/1701928919851_cfy20504777_cdarknavy_v194013_pmcgt9.webp"
+  },
+  {
+    "title": "Vintage Logo T-shirt",
+    "price": 25.99,
+    "description": "T-shirt with a vintage logo for a stylish look.",
+    "discount": 20,
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#f1c40f", "#2c3e50", "#3498db"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701928967/shop-co/1701928966543_acdc588-47562_pt28ej.jpg"
+  },
+  {
+    "title": "Skinny Fit Jeans",
+    "price": 59.99,
+    "description": "Skinny Fit jeans for a modern look.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#2c3e50", "#f39c12", "#3498db"],
+    "category": "jeans",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929042/shop-co/1701929041492_7687095_7_syrnwv.webp"
+  },
+  {
+    "title": "Street Art Hoodie",
+    "price": 42.99,
+    "description": "Hoodie with street art for a vibrant look.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#e67e22", "#d35400", "#3498db"],
+    "category": "hoodie",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929087/shop-co/1701929086136_B1i3u9-Q-KS._AC_CLa_2140_2000_B1WxD_Q-1eS.png_0_0_2140_2000_0.0_0.0_2140.0_2000.0_UY1000__ssvhbk.jpg"
+  },
+  {
+    "title": "Floral Print T-shirt",
+    "price": 29.99,
+    "description": "T-shirt with floral print for a summery vibe.",
+    "size": ["Small", "Medium", "Large"],
+    "color": ["#3498db", "#2ecc71", "#e74c3c"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929127/shop-co/1701929125185_etro-mens-floral-print-t-shirt-pink-tee-p43001-264099_zoom_ghgwmr.jpg"
+  },
+  {
+    "title": "Beach Ready Shorts",
+    "price": 34.99,
+    "description": "Shorts for beach relaxation and good vibes.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#2ecc71", "#3498db", "#9b59b6"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929172/shop-co/1701929171641_image_h2czhf.webp"
+  },
+  {
+    "title": "Linen Comfort Shirt",
+    "price": 49.99,
+    "description": "Linen shirt for comfort in hot weather.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#e74c3c"],
+    "category": "jeans",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929211/shop-co/1701929211472_4f26b40be864a3193ae5229b15e4bf59_001_acziml.webp"
+  },
+  {
+    "title": "Classic Denim Jacket",
+    "price": 59.99,
+    "description": "Timeless denim jacket for a casual look.",
+    "discount": 10,
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#34495e", "#95a5a6", "#3498db"],
+    "category": "jacket",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929252/shop-co/1701929249637_cn50027279_tbgkel.webp"
+  },
+  {
+    "title": "Slim Fit Chinos",
+    "price": 39.99,
+    "description": "Stylish slim fit chinos for a polished appearance.",
+    "size": ["Large", "X-Large"],
+    "color": ["#2ecc71", "#f39c12"],
+    "category": "pants",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929297/shop-co/1701929296462_mtrs3018-buaa-1_q0k3bu.webp"
+  },
+  {
+    "title": "Cozy Knit Sweater",
+    "price": 29.99,
+    "description": "Warm and cozy knit sweater for chilly days.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#e74c3c", "#34495e", "#f39c12"],
+    "category": "sweater",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929350/shop-co/1701929350243_556842667_max_sv5oe9.jpg"
+  },
+  {
+    "title": "Casual Striped Shirt",
+    "price": 22.99,
+    "description": "Comfortable striped shirt for a laid-back style.",
+    "size": ["Small", "Medium"],
+    "color": ["#f39c12", "#95a5a6"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929410/shop-co/1701929409927_dtls1124a_pink_blue_stripe_short_sleeve_shirt_fqykyv.jpg"
+  },
+  {
+    "title": "Sporty Track Pants",
+    "price": 34.99,
+    "description": "Athletic track pants for a sporty look.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#9b59b6", "#2ecc71", "#3498db"],
+    "category": "pants",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929450/shop-co/1701929449242_ink-sporty-b-track-pants-p29581-89263_zoom_g1bl80.jpg"
+  },
+  {
+    "title": "Modern Button-Up Shirt",
+    "price": 44.99,
+    "description": "Contemporary button-up shirt for a sleek appearance.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#34495e", "#f1c40f", "#e74c3c"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929512/shop-co/1701929510782_AESS8034._1_duyfes.webp"
+  },
+  {
+    "title": "Graphic Print Hoodie",
+    "price": 27.99,
+    "description": "Hoodie with a unique graphic print for a bold statement.",
+    "size": ["X-Small", "Small", "Medium"],
+    "color": ["#c0392b", "#3498db", "#27ae60"],
+    "category": "hoodie",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929557/shop-co/1701929556638_d7d1a6914f1bf20867ef0c477a891cca_lf98va.jpg"
+  },
+  {
+    "title": "Relaxed Fit Joggers",
+    "price": 54.99,
+    "description": "Joggers with a relaxed fit for ultimate comfort.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#1abc9c", "#f39c12", "#3498db"],
+    "category": "pants",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929598/shop-co/1701929597416_hmgoepprod_ueqgq3.jpg"
+  },
+  {
+    "title": "Vintage Graphic T-shirt",
+    "price": 37.99,
+    "description": "T-shirt with a vintage graphic for a retro vibe.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#d35400", "#3498db", "#e74c3c"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929639/shop-co/1701929638785_GUEST_51fa1e56-3476-4f30-83fe-09c23343ae72_rmbnmt.jpg"
+  },
+  {
+    "title": "Casual Denim Shorts",
+    "price": 27.99,
+    "description": "Denim shorts for a laid-back and cool style.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#2980b9", "#f39c12", "#2ecc71"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929694/shop-co/1701929691117_LZLER-Mens-Casual-Jean-Shorts-Ripped-Slim-Denim-Shorts_553106b9-02ce-4ab5-9ffa-4009d5ae6dec.47de2358354dcb1dc8921d19ebaf612c_sehm3v.webp"
+  },
+  {
+    "title": "Linen Summer Dress",
+    "price": 31.99,
+    "description": "Light and breezy linen dress for summer days.",
+    "size": ["Small", "Medium", "Large"],
+    "color": ["#27ae60", "#2ecc71", "#3498db"],
+    "category": "dress",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929776/shop-co/1701929776006_slide_23_bsl5cn.webp"
+  },
+  {
+    "title": "Casual Plaid Shirt",
+    "price": 49.99,
+    "description": "Casual plaid shirt for a timeless look.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#8e44ad", "#2c3e50", "#f1c40f"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929812/shop-co/1701929811057_228061_36802_41_ihrwry.jpg"
+  },
+  {
+    "title": "Retro Logo Sweatshirt",
+    "price": 25.99,
+    "description": "Sweatshirt with a retro logo for a vintage feel.",
+    "discount": 15,
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#f1c40f", "#2c3e50", "#3498db"],
+    "category": "sweater",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929854/shop-co/1701929853114_YellowBeerChurchRetroLogoBreweryCrewSweatshirt_CrewneckVintageSweatshirts_2048x_omq8y9.webp"
+  },
+  {
+    "title": "High-Rise Skinny Jeans",
+    "price": 59.99,
+    "description": "High-rise skinny jeans for a modern and flattering fit.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#2c3e50", "#f39c12", "#3498db"],
+    "category": "jeans",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929911/shop-co/1701929909221_cn27230785_t4it5l.webp"
+  },
+  {
+    "title": "Streetwear Windbreaker",
+    "price": 42.99,
+    "description": "Windbreaker for a trendy streetwear look.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#e67e22", "#d35400", "#3498db"],
+    "category": "jacket",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701929966/shop-co/1701929965650_bethnal-windbreaker-jacket-black-king-apparel-ss21-bjb-4_cfqgsa.jpg"
+  },
+  {
+    "title": "Floral Print Maxi Dress",
+    "price": 29.99,
+    "description": "Maxi dress with a floral print for a feminine touch.",
+    "size": ["Small", "Medium", "Large"],
+    "color": ["#3498db", "#2ecc71", "#e74c3c"],
+    "category": "dress",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930031/shop-co/1701930030813_30aejb51citjirmtw0pw7yb7nr3p_lxzhgn.webp"
+  },
+  {
+    "title": "Cargo Style Shorts",
+    "price": 34.99,
+    "description": "Cargo shorts for a utilitarian and rugged style.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#2ecc71", "#3498db", "#9b59b6"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930084/shop-co/1701930077665_0M019910_01__71363_fepujn.jpg"
+  },
+  {
+    "title": "Boho-Chic Blouse",
+    "price": 49.99,
+    "description": "Boho-chic blouse for a free-spirited look.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#000", "#fff", "#857124"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930136/shop-co/1701930134915_peta-boho-chic-lantern-sleeve-loose-blouse-518242_800x_exbmd1.jpg"
+  },
+  {
+    "title": "Sleek Leather Jacket",
+    "price": 79.99,
+    "description": "Sleek leather jacket for a stylish and edgy appearance.",
+    "discount": 20,
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#34495e", "#95a5a6", "#3498db"],
+    "category": "jacket",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930192/shop-co/1701930190239_ImageDownloadProxy_6611992e-838f-4e8b-80ff-0bcd9d03a521_nsa5hq.webp"
+  },
+  {
+    "title": "Cargo Utility Pants",
+    "price": 49.99,
+    "description": "Cargo utility pants for a rugged and functional look.",
+    "size": ["Large", "X-Large"],
+    "color": ["#2ecc71", "#f39c12"],
+    "category": "pants",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930230/shop-co/1701930229912_KIC_130-3061-1194-420_prod1_whaf3s.avif"
+  },
+  {
+    "title": "Chunky Knit Cardigan",
+    "price": 39.99,
+    "description": "Chunky knit cardigan for warmth and style.",
+    "size": ["X-Large", "XX-Large", "3X-Large"],
+    "color": ["#e74c3c", "#34495e", "#f39c12"],
+    "category": "sweater",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930272/shop-co/1701930271207_20112c.70_kamvaj.jpg"
+  },
+  {
+    "title": "Striped Oxford Shirt",
+    "price": 24.99,
+    "description": "Striped Oxford shirt for a classic and refined look.",
+    "size": ["Small", "Medium"],
+    "color": ["#f39c12", "#95a5a6"],
+    "category": "shirts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930312/shop-co/1701930311748_209411_47_41_g6awl5.jpg"
+  },
+  {
+    "title": "Athletic Training Shorts",
+    "price": 29.99,
+    "description": "Athletic training shorts for a comfortable workout.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#9b59b6", "#2ecc71", "#3498db"],
+    "category": "shorts",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930312/shop-co/1701930311748_209411_47_41_g6awl5.jpg"
+  },
+  {
+    "title": "Modern Striped Sweater",
+    "price": 44.99,
+    "description": "Modern striped sweater for a trendy and casual look.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#34495e", "#f1c40f", "#e74c3c"],
+    "category": "sweater",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930388/shop-co/1701930385577_520252_42882_41_mcxbgi.jpg"
+  },
+  {
+    "title": "Graphic Print Pullover",
+    "price": 32.99,
+    "description": "Pullover with a unique graphic print for a standout style.",
+    "size": ["X-Small", "Small", "Medium"],
+    "color": ["#c0392b", "#3498db", "#27ae60"],
+    "category": "hoodie",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930457/shop-co/1701930456669_173234-0560_2_a79e7186-189f-41a3-9497-ffeaf7797350_800x_vekbuy.webp"
+  },
+  {
+    "title": "Tapered Jogging Pants",
+    "price": 54.99,
+    "description": "Tapered jogging pants for a sporty and modern fit.",
+    "size": ["Large", "X-Large", "XX-Large"],
+    "color": ["#1abc9c", "#f39c12", "#3498db"],
+    "category": "pants",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930515/shop-co/1701930514917_48228903_xxl_o3ny6z.avif"
+  },
+  {
+    "title": "Vintage Band T-shirt",
+    "price": 37.99,
+    "description": "T-shirt with a vintage band print for a retro vibe.",
+    "size": ["Medium", "Large", "X-Large"],
+    "color": ["#d35400", "#3498db", "#e74c3c"],
+    "category": "t-shirt",
+    "image": "https://res.cloudinary.com/dcnl3z4ll/image/upload/v1701930559/shop-co/1701930558961_X3CTBA76_wci6oj.jpg"
+  }
+]
