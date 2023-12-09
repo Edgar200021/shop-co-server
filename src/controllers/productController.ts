@@ -118,6 +118,9 @@ const getProductFilters = async (req: Request, res: Response) => {
         size: {
           $addToSet: "$size",
         },
+        categories: {
+          $addToSet: "$category",
+        },
       },
     },
   ]);
@@ -129,6 +132,7 @@ const getProductFilters = async (req: Request, res: Response) => {
       maxPrice: result[0].maxPrice,
       colors: result[0].colors,
       size: result[0].size,
+      categories: result[0].categories,
     },
   });
 };
