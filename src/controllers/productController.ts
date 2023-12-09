@@ -122,12 +122,13 @@ const getProductFilters = async (req: Request, res: Response) => {
     },
   ]);
 
-  console.log(result);
-
   res.status(200).json({
     status: "success",
     data: {
-      filters: result,
+      minPrice: result[0].minPrice,
+      maxPrice: result[0].maxPrice,
+      colors: result[0].colors,
+      size: result[0].size,
     },
   });
 };
