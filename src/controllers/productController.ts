@@ -99,10 +99,42 @@ const deleteProduct = async (req: Request, res: Response) => {
   return res.status(204).json({ status: "success", data: null });
 };
 
+const getProductFilters = async (req: Request, res: Response) => {
+  const result = await Product.aggregate([
+    { $unwind: "$color" },
+    { $unwind: "$size" },
+    {
+      $group: {
+        _id: null,
+        minPrice: {
+          $min: "$price",
+        },
+        maxPrice: {
+          $max: "$price",
+        },
+        colors: {
+          $addToSet: "$color",
+        },
+        size: {
+          $addToSet: "$size",
+        },
+      },
+    },
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      filters: result,
+    },
+  });
+};
+
 export {
   getAllProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductFilters,
 };

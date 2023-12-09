@@ -6,6 +6,8 @@ import { upload } from "../utils/multer";
 
 const router = Router();
 
+router.get("/filters", productController.getProductFilters);
+
 router
   .route("/")
   .get(productController.getAllProducts)
