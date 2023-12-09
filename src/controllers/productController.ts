@@ -122,6 +122,8 @@ const getProductFilters = async (req: Request, res: Response) => {
     },
   ]);
 
+  console.log(result);
+
   res.status(200).json({
     status: "success",
     data: {
