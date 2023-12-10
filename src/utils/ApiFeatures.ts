@@ -15,7 +15,7 @@ export class APIFeatures<T extends Partial<IQuery>> {
   filter() {
     const { filterObj } = this._splitFilteredFields();
 
-    //console.log(filterObj);
+    console.log(filterObj);
     this.query = this.query.find(filterObj);
 
     return this;
@@ -55,13 +55,32 @@ export class APIFeatures<T extends Partial<IQuery>> {
       const value = {};
       const keys = Object.keys(val);
 
-      if (isReferenceType && keys.length > 0) {
-        keys.forEach((el) => {
-          value[`$${el}`] = val![el];
-        });
+      if (isReferenceType && keys.length > 1) {
+        if (key === "price") {
+          value["price"] = [
+            {
+              priceDiscount: {
+                $exists: true,
+                $ne: null,
+                $lte: val!["lte"],
+                $gte: val!["gte"],
+              },
+            },
+            {
+              $and: [
+                { priceDiscount: { $exists: false } },
+                { price: { $lte: val!["lte"], $gte: val!["gte"] } },
+              ],
+            },
+          ];
+        } else {
+          keys.forEach((el) => {
+            value[`$${el}`] = val![el];
+          });
+        }
       }
 
-      if (isReferenceType) {
+      if (isReferenceType && keys.length === 1) {
         const multipleValues = val![keys[0]]
           .split(",")
           .map((val: string) =>
@@ -76,9 +95,11 @@ export class APIFeatures<T extends Partial<IQuery>> {
               : val![keys[0]];
       }
 
-      console.log(value);
       !this._excludedFields.has(key) &&
-        filterMap.set(key, isReferenceType ? value : val);
+        filterMap.set(
+          key === "price" ? "$or" : key,
+          isReferenceType ? (key === "price" ? value["price"] : value) : val,
+        );
     });
 
     return {

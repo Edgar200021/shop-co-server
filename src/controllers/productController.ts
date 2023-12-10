@@ -12,11 +12,11 @@ const getAllProducts: RequestHandler<
   unknown,
   IGetAllProductsQuery
 > = async (req, res) => {
-
   const productsFeature = new APIFeatures<IGetAllProductsQuery>(
     Product.find(),
     req.query,
   )
+
     .filter()
     .sort()
     .limitFields()
