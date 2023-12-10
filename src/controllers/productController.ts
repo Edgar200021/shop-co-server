@@ -12,6 +12,7 @@ const getAllProducts: RequestHandler<
   unknown,
   IGetAllProductsQuery
 > = async (req, res) => {
+
   const productsFeature = new APIFeatures<IGetAllProductsQuery>(
     Product.find(),
     req.query,
@@ -39,7 +40,6 @@ const getProduct = async (req: Request, res: Response) => {
     throw new AppError(`There are no product with id ${req.params.id}`, 404);
   }
 
-  console.log(product);
   return res.status(200).json({
     status: "success",
     data: {

@@ -15,7 +15,7 @@ export class APIFeatures<T extends Partial<IQuery>> {
   filter() {
     const { filterObj } = this._splitFilteredFields();
 
-    console.log(filterObj);
+    //console.log(filterObj);
     this.query = this.query.find(filterObj);
 
     return this;
@@ -53,24 +53,30 @@ export class APIFeatures<T extends Partial<IQuery>> {
     Object.entries(this.queryObj).forEach(([key, val]) => {
       const isReferenceType = typeof val === "object";
       const value = {};
+      const keys = Object.keys(val);
 
-      if (isReferenceType) {
-        const firstKey = Object.keys(val)[0];
-
-        const multipleValues = val![firstKey]
-          .split(",")
-          .map((val: string) =>
-            key === "color" ? `#${val.trim()}` : val.trim(),
-          );
-
-        value[`$${firstKey}`] =
-          firstKey === "regex"
-            ? new RegExp(val![firstKey], "i")
-            : firstKey === "elemMatch"
-              ? { $in: multipleValues }
-              : val![firstKey];
+      if (isReferenceType && keys.length > 0) {
+        keys.forEach((el) => {
+          value[`$${el}`] = val![el];
+        });
       }
 
+      if (isReferenceType) {
+        const multipleValues = val![keys[0]]
+          .split(",")
+          .map((val: string) =>
+            keys[0] === "color" ? `#${val.trim()}` : val.trim(),
+          );
+
+        value[`$${keys[0]}`] =
+          keys[0] === "regex"
+            ? new RegExp(val![keys[0]], "i")
+            : keys[0] === "elemMatch"
+              ? { $in: multipleValues }
+              : val![keys[0]];
+      }
+
+      console.log(value);
       !this._excludedFields.has(key) &&
         filterMap.set(key, isReferenceType ? value : val);
     });
