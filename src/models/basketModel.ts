@@ -41,8 +41,14 @@ const basketSchema = new Schema(
     },
     items: [basketItemSchema],
     quantity: Number,
-    totalPrice: Number,
-    totalDiscountedPrice: Number,
+    totalPrice: {
+      type: Number,
+      set: (val: number) => val.toFixed(2),
+    },
+    totalDiscountedPrice: {
+      type: Number,
+      set: (val: number) => val.toFixed(2),
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );

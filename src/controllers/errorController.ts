@@ -64,12 +64,9 @@ const errorController = (
   res: Response,
   next: NextFunction,
 ) => {
-  //  return res.status(500).json({ err });
-
   if (env.NODE_ENV === "production") handleDevelopmentError(err, res);
   if (env.NODE_ENV === "development") {
-    let error = { ...err, name: err.name };
-    console.log(error.name);
+    let error = { ...err, name: err.name, message: err.message };
     if (error.name === "ValidationError")
       //@ts-expect-error for validation errors
       error = handleValidationErrorDB(error);

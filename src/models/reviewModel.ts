@@ -2,29 +2,32 @@ import { InferSchemaType, Schema, Types, model } from "mongoose";
 import Product from "./productModel";
 import { AppError } from "../utils/AppError";
 
-const reviewSchema = new Schema({
-  review: {
-    type: String,
-    required: [true, "Review can not be empty!"],
-    trim: true,
+const reviewSchema = new Schema(
+  {
+    review: {
+      type: String,
+      required: [true, "Review can not be empty!"],
+      trim: true,
+    },
+    rating: {
+      type: Number,
+      required: [true, "Review must have a rating"],
+      min: [1, "A review rating must be more or equal than 1"],
+      max: [5, "A review rating must be less or equal than 5"],
+    },
+    user: {
+      type: Schema.ObjectId,
+      ref: "User",
+      required: [true, "Review must belong to a user"],
+    },
+    product: {
+      type: Schema.ObjectId,
+      ref: "Product",
+      required: [true, "Review must belong to a product"],
+    },
   },
-  rating: {
-    type: Number,
-    required: [true, "Review must have a rating"],
-    min: [1, "A review rating must be more or equal than 1"],
-    max: [5, "A review rating must be less or equal than 5"],
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: "User",
-    required: [true, "Review must belong to a user"],
-  },
-  product: {
-    type: Schema.ObjectId,
-    ref: "Product",
-    required: [true, "Review must belong to a product"],
-  },
-});
+  { timestamps: true },
+);
 
 reviewSchema.index({ user: 1, product: 1 }, { unique: true });
 

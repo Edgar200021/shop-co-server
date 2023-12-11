@@ -24,6 +24,8 @@ const getAllReviews: RequestHandler<
   if (!req.params.productId)
     throw new AppError("Please provide product id", 400);
 
+  console.log("logger");
+
   const reviewFeature = new APIFeatures(
     Review.find({
       product: new mongoose.Types.ObjectId(req.params.productId),
@@ -78,6 +80,7 @@ const getMyReview = async (req: ICustomRequest, res: Response) => {
 };
 
 const createReview = async (req: ICustomRequest, res: Response) => {
+  console.log(req.params.productId);
   const review = await Review.create({
     product: new mongoose.Types.ObjectId(req.params.productId),
     user: req.user.id,
@@ -115,7 +118,7 @@ const updateReview = async (req: Request, res: Response) => {
     { new: true, runValidators: true },
   );
 
-  if (!review) throw new AppError(`No review widh user id ${req.body.id}`, 404);
+  if (!review) throw new AppError(`No review with user id ${req.body.id}`, 404);
 
   return res.status(200).json({
     status: "success",
@@ -131,7 +134,7 @@ const deleteReview = async (req: Request, res: Response) => {
     user: req.body.userId,
   });
 
-  if (!review) throw new AppError(`No review widh user id ${req.body.id}`, 404);
+  if (!review) throw new AppError(`No review with user id ${req.body.id}`, 404);
 
   return res.status(204).json({
     status: "success",
