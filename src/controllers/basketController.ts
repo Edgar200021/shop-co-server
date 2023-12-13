@@ -23,10 +23,13 @@ const getAllBasketProducts: RequestHandler<
   ).paginate();
 
   const basketProducts = await basketFeature.query;
+  const totalResultsAfterFiltering = await Basket.countDocuments(
+    basketFeature._filterObj,
+  );
 
   return res.status(200).json({
     status: "success",
-    results: basketProducts.items.length,
+    results: totalResultsAfterFiltering,
     data: {
       basketProducts: basketProducts.items,
       totalQuantity: basketProducts.quantity,

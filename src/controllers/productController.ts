@@ -16,17 +16,19 @@ const getAllProducts: RequestHandler<
     Product.find(),
     req.query,
   )
-
     .filter()
     .sort()
     .limitFields()
     .paginate();
 
   const products = await productsFeature.query;
+  const totalResultsAfterFiltering = await Product.countDocuments(
+    productsFeature._filterObj,
+  );
 
   return res.status(200).json({
     status: "success",
-    results: products.length,
+    results: totalResultsAfterFiltering,
     data: {
       products,
     },

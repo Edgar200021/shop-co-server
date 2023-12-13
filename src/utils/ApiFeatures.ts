@@ -7,6 +7,8 @@ export class APIFeatures<T extends Partial<IQuery>> {
     .add("limit")
     .add("fields");
 
+  _filterObj;
+
   constructor(
     public query: any,
     public queryObj: T,
@@ -15,14 +17,17 @@ export class APIFeatures<T extends Partial<IQuery>> {
   filter() {
     const { filterObj } = this._splitFilteredFields();
 
-    console.log(filterObj);
+    //console.log(filterObj);
     this.query = this.query.find(filterObj);
 
+    this._filterObj = filterObj;
     return this;
   }
 
   sort() {
-    const { sort = "createdAt" } = this.queryObj;
+    const { sort } = this.queryObj;
+
+    if (!sort) return this;
 
     this.query = this.query.sort(this._splitFields(sort));
     return this;
@@ -38,8 +43,8 @@ export class APIFeatures<T extends Partial<IQuery>> {
   paginate() {
     const { page, limit } = this.queryObj;
 
-    const defaultPage = isFinite(+page) ? +page : 1,
-      defaultLimit = isFinite(+limit) ? +limit : 10,
+    const defaultPage = page && isFinite(+page) ? +page : 1,
+      defaultLimit = limit && isFinite(+limit) ? +limit : 9,
       skip = (defaultPage - 1) * defaultLimit;
 
     this.query = this.query.skip(skip).limit(defaultLimit);
@@ -84,7 +89,7 @@ export class APIFeatures<T extends Partial<IQuery>> {
         const multipleValues = val![keys[0]]
           .split(",")
           .map((val: string) =>
-            keys[0] === "color" ? `#${val.trim()}` : val.trim(),
+            key === "color" ? `#${val.trim()}` : val.trim(),
           );
 
         value[`$${keys[0]}`] =

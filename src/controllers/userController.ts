@@ -35,10 +35,13 @@ const getAllUsers: RequestHandler<
     .paginate();
 
   const users = await usersFeature.query;
+  const totalResultsAfterFiltering = await User.countDocuments(
+    usersFeature._filterObj,
+  );
 
   return res.status(200).json({
     status: "success",
-    results: users.length,
+    results: totalResultsAfterFiltering,
     data: {
       users,
     },

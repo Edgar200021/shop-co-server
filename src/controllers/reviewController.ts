@@ -25,7 +25,6 @@ const getAllReviews: RequestHandler<
     throw new AppError("Please provide product id", 400);
 
   console.log("logger");
-
   const reviewFeature = new APIFeatures(
     Review.find({
       product: new mongoose.Types.ObjectId(req.params.productId),
@@ -38,10 +37,13 @@ const getAllReviews: RequestHandler<
     .paginate();
 
   const reviews = await reviewFeature.query;
+  const totalResultsAfterFiltering = await Review.countDocuments(
+    reviewFeature._filterObj,
+  );
 
   return res.status(200).json({
     status: "success",
-    results: reviews.length,
+    results: totalResultsAfterFiltering,
     data: {
       reviews,
     },
